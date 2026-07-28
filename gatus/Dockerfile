@@ -30,3 +30,5 @@ USER nonroot:nonroot
 EXPOSE 8080
 
 CMD ["./gatus"]
+
+#test
