@@ -100,6 +100,11 @@ resource "aws_iam_role_policy_attachment" "github_actions_s3" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "github_actions_admin" {
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
 resource "aws_cloudwatch_log_group" "gatus_log_group" {
   name              = "gatus_log_group"
   retention_in_days = 30
