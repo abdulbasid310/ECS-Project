@@ -38,6 +38,10 @@ jobs:
         role-to-assume: arn:aws:iam::060501087561:role/GitHubActionsRole
         aws-region: eu-west-2
 
+    - name: Verify AWS identity
+      run: |
+        aws sts get-caller-identity
+
     - name: Set up Docker buildx
       uses: docker/setup-buildx-action@v3
     
