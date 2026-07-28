@@ -46,6 +46,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build and push Docker image
+      id: build-image
       run: |
         IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
         docker build -t app ./gatus 
@@ -57,7 +58,7 @@ jobs:
     - name: Download task definition
       run: |
         aws ecs describe-task-definition \
-        --task-definition gatus-task \
+        --task-definition gatus_definition \
         --query taskDefinition > task-definition.json
 
     - name: Render task definition
