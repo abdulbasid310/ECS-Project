@@ -19,6 +19,13 @@ resource "aws_ecs_task_definition" "gatus_definition" {
           hostPort      = var.app_port
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.gatus_log_group.name
+          awslogs-region        = var.region
+          awslogs-stream-prefix = "gatus"
+        }
 
   }])
 }
