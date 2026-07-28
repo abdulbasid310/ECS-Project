@@ -11,6 +11,10 @@ on:
 env:
   AWS_REGION: eu-west-2
 
+permissions:
+  id-token: write
+  contents: read
+
 defaults:
   run:
     working-directory: infra
