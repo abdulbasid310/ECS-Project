@@ -63,7 +63,8 @@ jobs:
       run: |
         aws ecs describe-task-definition \
         --task-definition gatus_definition \
-        --query taskDefinition > task-definition.json
+        --query taskDefinition \
+        --region eu-west-2 > task-definition.json
 
     - name: Render task definition
       id: render-task-definition
