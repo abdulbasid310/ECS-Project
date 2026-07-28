@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "gatus_definition" {
           awslogs-region        = var.region
           awslogs-stream-prefix = "gatus"
         }
-
+      }
   }])
 }
 
