@@ -24,7 +24,7 @@ module "ecs" {
     target_group_arn = module.alb.target_group_arn
     fargate_cpu = var.fargate_cpu
     fargate_memory = var.fargate_memory
-    app_image = "${module.ecr.repository_url}:v1"
+    app_image = "${module.ecr.repository_url}:latest"
     app_port = var.app_port
     alb_sg = module.alb.alb_sg
 
