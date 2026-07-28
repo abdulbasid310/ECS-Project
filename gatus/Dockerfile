@@ -31,4 +31,4 @@ EXPOSE 8080
 
 CMD ["./gatus"]
 
-#test4
+#test5
