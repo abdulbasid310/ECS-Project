@@ -41,4 +41,4 @@ variable "az_B" {
     type = string
 }
 
-# Terraform pipeline test7
+# Terraform pipeline test8
