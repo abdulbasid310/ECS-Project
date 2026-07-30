@@ -22,6 +22,7 @@ Security - HTTPS redirect
 
 Project Structure
 '''text
+.
 ├── .github/
 │   └── workflows/
 │       ├── application.yml
