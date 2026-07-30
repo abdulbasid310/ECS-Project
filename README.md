@@ -9,6 +9,7 @@ About the app:
 Gatus is a health dashboard that allows you to configure health checks for each of your features so that they can be monitored without existing traffic.
 This allows Gatus to alert you to services being down before any potential impact on clients.
 
+```
 Local Development:
 
 git clone https://github.com/abdulbasid310/ECS-Project.git
@@ -17,6 +18,7 @@ cd gatus
 docker build -t gatus .
 docker run -p 8080:8080 gatus
 Then open http://localhost:8080
+```
 
 Architecture Diagram:
 
