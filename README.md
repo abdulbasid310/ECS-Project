@@ -11,6 +11,12 @@ This allows Gatus to alert you to services being down before any potential impac
 
 Local Development:
 
+git clone https://github.com/abdulbasid310/ECS-Project.git
+cd ECS-Project
+cd gatus
+docker build -t gatus .
+docker run -p 8080:8080 gatus
+Then open http://localhost:8080
 
 Architecture Diagram:
 
