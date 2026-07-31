@@ -20,7 +20,7 @@ module "ecs" {
     source = "./modules/ecs"
 
     vpc_id = module.vpc.vpc_id
-    subnet_ids = module.vpc.public_subnet_ids
+    subnet_ids = module.vpc.private_subnet_ids
     target_group_arn = module.alb.target_group_arn
     fargate_cpu = var.fargate_cpu
     fargate_memory = var.fargate_memory

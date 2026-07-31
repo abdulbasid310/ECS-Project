@@ -30,5 +30,3 @@ USER nonroot:nonroot
 EXPOSE 8080
 
 CMD ["./gatus", "--config-path", "/app/config.yaml"]
-
-

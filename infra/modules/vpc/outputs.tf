@@ -5,3 +5,7 @@ output "vpc_id" {
 output "public_subnet_ids" {
     value = [aws_subnet.PublicSubnetA.id, aws_subnet.PublicSubnetB.id]
 }
+
+output "private_subnet_ids" {
+    value = [aws_subnet.PrivateSubnetA.id, aws_subnet.PrivateSubnetB.id]
+}

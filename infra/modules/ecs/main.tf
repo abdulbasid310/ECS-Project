@@ -41,7 +41,7 @@ resource "aws_ecs_service" "gatus_service" {
   network_configuration {
     security_groups  = [aws_security_group.ecs_sg.id]
     subnets          = var.subnet_ids
-    assign_public_ip = true
+    assign_public_ip = false
   }
 
   load_balancer {
