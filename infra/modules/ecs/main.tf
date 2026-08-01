@@ -148,7 +148,7 @@ resource "aws_iam_role" "github_actions_role" {
           }
 
           StringLike = {
-             "token.actions.githubusercontent.com:sub" = "repo:abdulbasid310@130777760/ECS-Project@1314350796:*"
+             "token.actions.githubusercontent.com:sub": "repo:abdulbasid310/ECS-Project:*"
           }
         }
       }
