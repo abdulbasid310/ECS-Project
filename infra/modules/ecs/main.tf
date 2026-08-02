@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "gatus_definition" {
   }])
 }
 
-# ECS fargate used for serverless compputing and automatic scaling
+# ECS fargate used for serverless computing and automatic scaling
 resource "aws_ecs_service" "gatus_service" {
   name            = "gatus_service"
   cluster         = aws_ecs_cluster.gatus_cluster.id
@@ -95,16 +95,6 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "github_actions_s3" {
-  role       = aws_iam_role.github_actions_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-}
-
-resource "aws_iam_role_policy_attachment" "github_actions_admin" {
-  role       = aws_iam_role.github_actions_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-}
-
 resource "aws_cloudwatch_log_group" "gatus_log_group" {
   name              = "gatus_log_group"
   retention_in_days = 30
@@ -114,62 +104,8 @@ resource "aws_cloudwatch_log_group" "gatus_log_group" {
   }
 }
 
-resource "aws_iam_openid_connect_provider" "github" {
-  url = "https://token.actions.githubusercontent.com"
-
-  client_id_list = [
-    "sts.amazonaws.com"
-  ]
-
-  thumbprint_list = [
-    "6938fd4d98bab03faadb97b34396831e3780aea1"
-  ]
-}
-
-resource "aws_iam_role" "github_actions_role" {
-  name = "GitHubActionsRole"
-  max_session_duration = 7200
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-
-    Statement = [
-      {
-        Effect = "Allow"
-
-        Principal = {
-          Federated = aws_iam_openid_connect_provider.github.arn
-        }
-
-        Action = "sts:AssumeRoleWithWebIdentity"
-
-        Condition = {
-          StringEquals = {
-            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-          }
-
-          StringLike = {
-              "token.actions.githubusercontent.com:sub" = "repo:abdulbasid310@130777760/ECS-Project@1314350796:*"
-          }
-        }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "github_actions_ecr" {
-  role       = aws_iam_role.github_actions_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
-}
 
 
-resource "aws_iam_role_policy_attachment" "github_actions_ecs" {
-  role       = aws_iam_role.github_actions_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
-}
 
 
-resource "aws_cloudwatch_log_stream" "gatus_log_stream" {
-  name           = "gatus_log_stream"
-  log_group_name = aws_cloudwatch_log_group.gatus_log_group.name
-} 
+
