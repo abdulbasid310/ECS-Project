@@ -56,25 +56,29 @@ resource "aws_security_group" "alb_sg" {
   name        = "alb_sg"
   description = "security group for the load balancer"
   vpc_id      = var.vpc_id
+}
 
-  ingress {
-    protocol    = "TCP"
-    from_port   = 80
-    to_port     = 80
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+resource "aws_vpc_security_group_ingress_rule" "alb_http_ingress" {
+  security_group_id = aws_security_group.alb_sg.id
 
-  ingress {
-    protocol    = "TCP"
-    from_port   = 443
-    to_port     = 443
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 80
+  to_port     = 80
+  ip_protocol = "tcp"
+}
 
-  egress {
-    protocol    = "-1"
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+resource "aws_vpc_security_group_ingress_rule" "alb_https_ingress" {
+  security_group_id = aws_security_group.alb_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 443
+  to_port     = 443
+  ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_egress_rule" "alb_egress" {
+  security_group_id = aws_security_group.alb_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = "-1"
 }

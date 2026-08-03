@@ -98,19 +98,22 @@ resource "aws_security_group" "ecs_sg" {
   name        = "ecs_sg"
   description = "Allow traffic to the cluster from the alb only"
   vpc_id      = var.vpc_id
-  ingress {
-    protocol        = "TCP"
-    from_port       = 8080
-    to_port         = 8080
-    security_groups = [var.alb_sg]
-  }
+}
 
-  egress {
-    protocol    = "-1"
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+resource "aws_vpc_security_group_ingress_rule" "ecs_ingress" {
+  security_group_id            = aws_security_group.ecs_sg.id
+  referenced_security_group_id = var.alb_sg
+
+  from_port   = 8080
+  to_port     = 8080
+  ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_egress_rule" "ecs_egress" {
+  security_group_id = aws_security_group.ecs_sg.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = "-1"
 }
 
 resource "aws_iam_role" "ecs_execution_role" {
