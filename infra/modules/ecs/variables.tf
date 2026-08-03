@@ -29,3 +29,11 @@ variable "app_image" {
 variable "alb_sg" {
     type = string
 }
+
+variable "min_capacity" {
+  default = 1
+}
+
+variable "max_capacity" {
+  default = 3
+}
