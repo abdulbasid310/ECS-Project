@@ -41,4 +41,3 @@ variable "az_B" {
     type = string
 }
 
-# Terraform pipeline test15
