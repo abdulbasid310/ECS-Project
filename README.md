@@ -21,7 +21,6 @@ I am expecting few users, in the 10s, however the architecture is designed with 
 
 ```
 git clone https://github.com/abdulbasid310/gatus-ecs-deployment.git
-cd ECS-Project
 cd gatus
 docker build -t gatus .
 docker run -p 8080:8080 gatus
