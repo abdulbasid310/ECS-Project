@@ -104,9 +104,12 @@ Then open http://localhost:8080
 ```
 
 ## CI/CD
-Application pipeline - pushes docker image to ECR for the ECS tasks to pull and triggers on push to main when there are changes in the app folder
-Terraform deploy pipeline - deploys terraform infrastructure on push to main when infrastructure folder has changes
-Terraform destroy pipeline - triggered manually by a button on github
+Application pipeline
+- pushes docker image to ECR for the ECS tasks to pull and triggers on push to main when there are changes in the app folder
+Terraform deploy pipeline
+- deploys terraform infrastructure on push to main when infrastructure folder has changes
+Terraform destroy pipeline
+- triggered manually by a button on github
 
 
 <img width="1440" height="900" alt="Screenshot 2026-07-27 at 21 33 24" src="https://github.com/user-attachments/assets/907f5956-e245-4551-9841-80f42d92943d" />
