@@ -36,6 +36,12 @@ Project Structure
 │       ├── application.yml
 │       └── terraform.yml
 |       └── tfdestroy.yml
+├── bootstrap/
+│   ├── backend.tf
+│   ├── iam.tf
+│   ├── main.tf
+│   ├── oidc.tf
+│   ├── outputs.tf
 ├── gatus/
 │   ├── config/
 │   ├── Dockerfile
