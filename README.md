@@ -20,7 +20,7 @@ I am expecting few users, in the 10s, however the architecture is designed with 
 ## Local Development
 
 ```
-git clone https://github.com/abdulbasid310/ECS-Project.git
+git clone https://github.com/abdulbasid310/gatus-ecs-deployment.git
 cd ECS-Project
 cd gatus
 docker build -t gatus .
