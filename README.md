@@ -10,7 +10,7 @@ Route 53 hosted zone is used to manage AWS resources.
 ## About the app
 Gatus is a health dashboard that allows you to configure health checks for each of your features so that they can be monitored without existing traffic. This allows the app to alert you to services being down before any potential impact on clients.
 
-I have chosen Gatus because it is lightweight and has a small resource footprint, making it quick to deploy and cost-effective on ECS because you only pay for resources you allocate. Gatus is also container native, not depending on any underlying hardware which makes containers replaceable.
+I have chosen Gatus because it is lightweight and has a small resource footprint, making it quick to deploy and cost-effective on ECS because you only pay for resources you allocate. Gatus is also container native, not depending on any underlying hardware which makes containers replaceable, reducing downtime.
 
 This app is hosted on ECS fargate because of its serverless management. This provides faster deployments and removes the need to manually manage guest operating systems or configure scaling. ECS has auto-scaling capabilities that can be configured based on CPU or memory usage.
 
