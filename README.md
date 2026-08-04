@@ -8,8 +8,13 @@ The application is hosted on Amazon ECS Fargate behind an ALB with HTTPS enabled
 Route 53 hosted zone is used to manage AWS resources.
 
 ## About the app
-Gatus is a health dashboard that allows you to configure health checks for each of your features so that they can be monitored without existing traffic.
-This allows Gatus to alert you to services being down before any potential impact on clients.
+Gatus is a health dashboard that allows you to configure health checks for each of your features so that they can be monitored without existing traffic. This allows the app to alert you to services being down before any potential impact on clients.
+
+I have chosen Gatus because it is a lightweight and has a small resource footprint, making it quick to deploy and cost-effective on ECS because you only pay for resources you allocate. Gatus is also container native, not depending on any underlying hardware which makes containers replaceable.
+
+This app is hosted on ECS fargate because of its serverless management. This provides faster deployments and removes the need to manually manage guest operating systems or configure scaling. ECS has auto-scaling capabilities that can be configured based on CPU or memory usage.
+
+I am expecting few users, in the 10s, however the architecture is designed with scalability in mind. CPU-based auto-scaling is configured to adjust the number of running tasks. The app is also available in two separate availability zones for resilience and high availability. The ALB distributes traffic across healthy ECS tasks and is configured with health checks to automatically replace failed tasks.
 
 
 ## Local Development
