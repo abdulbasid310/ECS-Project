@@ -22,6 +22,9 @@ Then open http://localhost:8080
 
 Architecture Diagram:
 
+<img width="920" height="1215" alt="architecture drawio" src="https://github.com/user-attachments/assets/b4cd7a28-8497-4f74-9a2c-e09eb2131ec6" />
+
+
 Components:
 Network - Two public subnets in separate availability zones for high availability and resilience
 Compute - ECS fargate used for serverless computing
