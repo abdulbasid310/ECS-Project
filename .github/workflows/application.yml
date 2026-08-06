@@ -28,7 +28,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::060501087561:role/GitHubActionsRole
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
         aws-region: eu-west-2
 
     - name: Set up Docker buildx
@@ -80,6 +80,3 @@ jobs:
         task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
-
-
-    
