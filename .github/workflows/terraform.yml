@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - modularised-project
     paths:
       - "infra/**"
 
