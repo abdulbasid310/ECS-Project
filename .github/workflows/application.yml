@@ -48,7 +48,7 @@ jobs:
     - name: Run trivy security scan
       uses: aquasecurity/trivy-action@v0.36.0
       with: 
-        image-ref: ${{ env.IMAGE_URI }}
+        image-ref: ${{ steps.build-image.outputs.image }}
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
