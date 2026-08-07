@@ -1,3 +1,12 @@
+# Creates a hosted zone for the delegated subdomain
+resource "aws_route53_zone" "labs" {
+    name = "labs.abdulbasiddevops.uk"
+
+    tags = {
+    Name = "subdomain-hosted-zone"
+    }
+}
+
 resource "aws_acm_certificate" "cert" {
     domain_name = var.domain_name
     validation_method = "DNS"
