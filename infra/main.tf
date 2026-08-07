@@ -1,7 +1,5 @@
 module "vpc" {
     source = "./modules/vpc"
-    az_A = var.az_A
-    az_B = var.az_B
 }
 
 module "ecr" {
