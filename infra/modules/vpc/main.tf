@@ -3,31 +3,20 @@ resource "aws_vpc" "my_vpc" {
 }
 
 # Two public subnets and two private subnets across different AZs for availability
-resource "aws_subnet" "PublicSubnetA" {
-  vpc_id                  = aws_vpc.my_vpc.id
-  cidr_block              = "10.0.0.0/24"
+resource "aws_subnet" "PublicSubnet" {
+  count = 2
+  vpc_id = aws_vpc.my_vpc.id
+  cidr_block = var.public_subnet_cidrs[count.index]
   map_public_ip_on_launch = true
-  availability_zone       = var.az_A
+  availability_zone = var.azs[count.index]
 }
 
-resource "aws_subnet" "PublicSubnetB" {
+resource "aws_subnet" "PrivateSubnet" {
+  count = 2
   vpc_id = aws_vpc.my_vpc.id
-  cidr_block = "10.0.1.0/24"
-  map_public_ip_on_launch = true
-  availability_zone = var.az_B
+  cidr_block = var.public_subnet_cidrs[count.index]
+  availability_zone = var.azs[count.index]
 }
-
-resource "aws_subnet" "PrivateSubnetA" {
-  vpc_id = aws_vpc.my_vpc.id
-  cidr_block = "10.0.2.0/24"
-  availability_zone = var.az_A 
-}
-
-resource "aws_subnet" "PrivateSubnetB" {
-  vpc_id = aws_vpc.my_vpc.id
-  cidr_block = "10.0.3.0/24"
-  availability_zone = var.az_B 
-}  
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.my_vpc.id
@@ -39,7 +28,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "ngw" {
     allocation_id = aws_eip.nat.id
-    subnet_id = aws_subnet.PublicSubnetA.id
+    subnet_id = aws_subnet.PublicSubnet[0].id
 
     depends_on = [
       aws_internet_gateway.igw
@@ -64,22 +53,14 @@ resource "aws_route_table" "private_route_table" {
   }
 }
 
-resource "aws_route_table_association" "public_subnet_association_A" {
-  subnet_id      = aws_subnet.PublicSubnetA.id
+resource "aws_route_table_association" "public_subnet_association" {
+  count = 2
+  subnet_id      = aws_subnet.PublicSubnet[count.index].id
   route_table_id = aws_route_table.public_route_table.id
 }
 
-resource "aws_route_table_association" "public_subnet_association_B" {
-  subnet_id      = aws_subnet.PublicSubnetB.id
-  route_table_id = aws_route_table.public_route_table.id
-}
-
-resource "aws_route_table_association" "private_subnet_associationA" {
-  subnet_id = aws_subnet.PrivateSubnetA.id
-  route_table_id = aws_route_table.private_route_table.id
-}
-
-resource "aws_route_table_association" "private_subnet_associationB" {
-  subnet_id = aws_subnet.PrivateSubnetB.id
+resource "aws_route_table_association" "private_subnet_association" {
+  count = 2
+  subnet_id = aws_subnet.PrivateSubnet[count.index].id
   route_table_id = aws_route_table.private_route_table.id
 }

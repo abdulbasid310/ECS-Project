@@ -7,11 +7,6 @@ resource "aws_acm_certificate" "cert" {
   }
 }
 
-# Creates a hosted zone for the delegated subdomain
-resource "aws_route53_zone" "labs" {
-    name = "labs.abdulbasiddevops.uk"
-}
-
 resource "aws_route53_record" "tm" {
     zone_id = aws_route53_zone.labs.zone_id
 
