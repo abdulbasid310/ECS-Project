@@ -5,11 +5,14 @@ resource "aws_acm_certificate" "cert" {
     lifecycle {
     create_before_destroy = true
   }
+
+  tags = {
+  Name = "gatus-certificate"
+  }
 }
 
 resource "aws_route53_record" "tm" {
     zone_id = aws_route53_zone.labs.zone_id
-
     name = "tm"
     type = "A"
 
@@ -17,8 +20,7 @@ resource "aws_route53_record" "tm" {
         name = var.alb_dns_name
         zone_id = var.alb_zone_id
         evaluate_target_health = true
-    }
-        
+    }   
 }
 
 resource "aws_route53_record" "cert_validation" {
@@ -33,9 +35,7 @@ resource "aws_route53_record" "cert_validation" {
   }
 
   zone_id = aws_route53_zone.labs.zone_id
-
   allow_overwrite = true
-
   name    = each.value.name
   records = [each.value.record]
   ttl     = 60
@@ -43,7 +43,6 @@ resource "aws_route53_record" "cert_validation" {
 }
 
 resource "aws_acm_certificate_validation" "cert" {
-
   certificate_arn = aws_acm_certificate.cert.arn
 
   validation_record_fqdns = [

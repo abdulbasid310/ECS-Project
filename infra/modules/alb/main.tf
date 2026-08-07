@@ -1,6 +1,10 @@
 resource "aws_alb" "gatus_alb" {
   subnets         = var.subnet_ids
   security_groups = [aws_security_group.alb_sg.id]
+
+  tags = {
+  Name = "gatus-alb"
+  }
 }
 
 resource "aws_alb_target_group" "gatus_target" {
@@ -18,6 +22,10 @@ resource "aws_alb_target_group" "gatus_target" {
     unhealthy_threshold = 2
     interval            = "30"
     timeout             = 5
+  }
+
+  tags = {
+  Name = "gatus-target-group"
   }
 }
 
@@ -56,6 +64,10 @@ resource "aws_security_group" "alb_sg" {
   name        = "alb_sg"
   description = "security group for the load balancer"
   vpc_id      = var.vpc_id
+
+  tags = {
+  Name = "alb-security-group"
+  }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "alb_http_ingress" {

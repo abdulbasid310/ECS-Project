@@ -1,5 +1,9 @@
 resource "aws_ecs_cluster" "gatus_cluster" {
   name = "gatus_cluster"
+
+  tags = {
+  Name = "gatus-cluster"
+  }
 }
 
 resource "aws_ecs_task_definition" "gatus_definition" {
@@ -50,7 +54,9 @@ resource "aws_ecs_service" "gatus_service" {
     container_port   = var.app_port
   }
 
-
+  tags = {
+  Name = "gatus-service"
+  }
 }
 
 resource "aws_appautoscaling_target" "ecs_target" {
@@ -85,6 +91,10 @@ resource "aws_security_group" "ecs_sg" {
   name        = "ecs_sg"
   description = "Allow traffic to the cluster from the alb only"
   vpc_id      = var.vpc_id
+
+  tags = {
+  Name = "ecs-security-group"
+  }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "ecs_ingress" {
