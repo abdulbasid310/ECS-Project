@@ -22,7 +22,7 @@ resource "aws_subnet" "PublicSubnet" {
 resource "aws_subnet" "PrivateSubnet" {
   count = 2
   vpc_id = aws_vpc.my_vpc.id
-  cidr_block = var.public_subnet_cidrs[count.index]
+  cidr_block = var.private_subnet_cidrs[count.index]
   availability_zone = var.azs[count.index]
 
   tags = {
